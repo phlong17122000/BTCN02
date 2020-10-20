@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bé Tập Tính</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Bé tập tính</h1>
+		</div>
+		<div class="row">
+			<div class="col-1">
+				<h2>Số thứ nhất</h2>
+			</div>
+			<div class="col-2" >
+				<input type="text" id="number1" onchange="checkinput()">
+			</div>
+			<div class="col-2">
+				<input class="radio-button" type="radio" name="pheptinh" value="Cộng"> Cộng
+				<input class="radio-button" type="radio" name="pheptinh" value="Trừ"> Trừ
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-1">
+				<h2>Số thứ hai</h2>
+			</div>
+			<div class="col-2">
+				<input type="text" id ="number2" onchange="checkinput()">
+			</div>
+			<div class="col-2">
+				<input class="radio-button" type="radio" name="pheptinh" value="Nhân"> Nhân
+				<input class="radio-button" type="radio" name="pheptinh" value="Chia"> Chia
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-1">
+				<h2>Kết quả</h2>
+			</div>
+			<div class="col-2" >
+				<input type="text" id="kq">
+			</div>
+			<div class="col-2">
+				<button onclick="Tinh()" >Tính</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-1">
+				<h2>Thông báo</h2>
+			</div>
+			<div class="col-2" >
+				<h3 id="tb" ></h3>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function isNumeric(str) {
+  				if (typeof str != "string") return false
+  				return !isNaN(str) &&  !isNaN(parseFloat(str)) 
+		}
+		function checkinput()
+		{
+			var num1=document.getElementById("number1").value;
+			var num2=document.getElementById("number2").value;
+			if (num1=="")
+			{
+				num1="1";
+			}
+			if (num2=="")
+			{
+				num2="1";
+			}
+			if (isNumeric(num1)==false || isNumeric(num2)==false)
+			{
+				document.getElementById("tb").innerHTML="Dữ liệu nhập không hợp lệ";
+			}
+			else
+			{
+				document.getElementById("tb").innerHTML="";
+			}
+
+		};
+		function Tinh()
+		{
+			var kt=0;
+			pheptinh=document.getElementsByName("pheptinh");
+			for (var i = 0; i<pheptinh.length; i++) {
+				if (pheptinh[i].checked)
+				{
+					var num1=document.getElementById("number1").value;
+					var num2=document.getElementById("number2").value;
+					if (isNumeric(num1) == true && isNumeric(num2) == true)
+					{
+						num1= parseFloat( num1);
+						num2= parseFloat(num2);
+						if (i==0)
+						{
+							document.getElementById("kq").value=num1+num2;
+						}
+						if (i==1)
+						{
+							document.getElementById("kq").value=num1-num2;
+						}
+						if (i==2)
+						{
+							document.getElementById("kq").value=num1*num2;
+						}
+						if (i==3)
+						{
+							document.getElementById("kq").value=num1/num2;
+						}
+					}
+					else
+					{
+						//document.getElementById("tb").innerHTML="Dữ liệu nhập không hợp lệ";
+					}
+					kt=1;
+				}
+			}
+			if (kt==0)
+				document.getElementById("tb").innerHTML="Chưa chọn phép tính";
+		};
+	</script>
+</body>
+</html>
